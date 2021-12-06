@@ -1,0 +1,5 @@
+classes= 1
+train  = data/train_cir.txt
+valid  = data/test_cir.txt
+names = data/obj.names
+backup = backup/
