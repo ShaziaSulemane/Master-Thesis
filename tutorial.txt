@@ -1,0 +1,82 @@
+To install everything go to folder yolo-mark and
+- cmake .
+- make
+
+Then enter folder darknet and :
+
+-make 
+
+Enter folder vine-gap and to create labels:
+
+$~/Documents/YOLO/yolo-mark/yolo_mark data/obj/train data/train.txt data/obj.names
+
+Enter folder vine-gap and to train:
+
+~/Documents/YOLO/darknet/darknet detector train data/obj.data yolov3-tiny.cfg
+
+Enter folder vine-gap and to run:
+
+~/Documents/YOLO/darknet/darknet detector test data/obj.data yolov3-tiny-test.cfg backup/yolov3-tiny_final.weights data/obj/train/Beja100m19A19B19C/IMG_0030_5.jpg -thresh 0.05 
+
+$
+
+To cut map image files:
+python /mapslicing/python split_image_with_overlap.py -f path/to_file
+
+### Arguments
+
+| Short version | Full version | Description
+| --------- | --------- | ----------- |
+| -h | --help | show this help message and exit |
+| -f FILEPATH | --file FILEPATH | File path |
+| -W WIDTH | --width WIDTH | Width of cropped image |
+| -H HEIGHT | --height HEIGHT | Height of cropped image |
+| -O OVERLAP | --overlap OVERLAP | Overlap percentage (int value) |
+| -o OUTDIR | --outdir OUTDIR | Output file directory. Empty if same path as original photo. |
+| -v | --version | show program version |
+
+
+To make custom object detectio: (for more information \vine_gap_cnn\darknet\README.cd )
+./darknet detector test data/obj.data yolo-obj.cfg yolo-obj_8000.weights
+
+Or just train with `-map` flag: 
+
+`darknet.exe detector train data/obj.data yolo-obj.cfg yolov4.conv.137 -map` 
+
+So you will see mAP-chart (red-line) in the Loss-chart Window.
+
+Use yad2k, YOLOv3, and YOLOv4 repositories to convert .weights to .h5 from those trained config files.
+
+
+To train Mask-RCNN, firstly you'll need to convert all .weights files from darknet to .h5
+
+## Installation
+1. Clone this repository
+2. Install dependencies
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+3. Run setup from the repository root directory
+    ```bash
+    python3 setup.py install
+    ``` 
+
+# Continue training a model that you had trained earlier
+python3 samples/maps/maps.py train --dataset=/path/to/coco/ --model=/path/to/weights.h5
+
+script_for_terminal.py automatically writes all file paths in the terminal and trains each network with their respective datasets. It's not generic.
+vine-gap-data_mask_rcnn.ipynb is the google colab notebook version of /samples/maps/maps.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
